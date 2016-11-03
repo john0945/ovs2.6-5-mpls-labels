@@ -1,0 +1,5 @@
+OFPST_PORT reply (OF1.4) (xid=0x2): 1 ports
+  port  2: rx pkts=103766, bytes=39651480, drop=0, errs=0, frame=252, over=253, crc=254
+           tx pkts=136, bytes=11512, drop=0, errs=0, coll=255
+           duration=1.001s
+

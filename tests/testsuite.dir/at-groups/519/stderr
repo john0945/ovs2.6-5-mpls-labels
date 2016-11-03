@@ -1,0 +1,4 @@
+test-unixctl.py: could not initialize control socket punix:/root/openvswitch-2.6.0/tests/testsuite.dir/0519/bogus/path (No such file or directory)
+test-unixctl.py: could not create unixctl server at /root/openvswitch-2.6.0/tests/testsuite.dir/0519/bogus/path (No such file or directory)
+2016-11-02T12:40:12Z |  0  | test-unixctl | ERR | test-unixctl.py: could not create unixctl server at /root/openvswitch-2.6.0/tests/testsuite.dir/0519/bogus/path (No such file or directory)
+2016-11-02T12:40:12.293Z |  0  | test-unixctl | ERR | test-unixctl.py: could not create unixctl server at /root/openvswitch-2.6.0/tests/testsuite.dir/0519/bogus/path (No such file or directory)

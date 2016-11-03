@@ -1,0 +1,6 @@
+NXST_IPFIX_FLOW reply (xid=0x2): 2 ids
+  id   1: flows=1, current flows=16, sampled pkts=120, ipv4 ok=240, ipv6 ok=0, tx pkts=4
+          pkts errs=160, ipv4 errs=68719476738, ipv6 errs=3, tx errs=5
+  id   2: flows=1, current flows=16, sampled pkts=120, ipv4 ok=240, ipv6 ok=0, tx pkts=4
+          pkts errs=160, ipv4 errs=68719476738, ipv6 errs=3, tx errs=5
+

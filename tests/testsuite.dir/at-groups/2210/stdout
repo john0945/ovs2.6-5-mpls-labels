@@ -1,0 +1,2 @@
+Tested converting all 1-terminal expressions with 2 numeric vars (each 3 bits) in terms of operators == != < <= > >= and 2 string vars.
+

@@ -1,0 +1,14 @@
+Force interface xapi1 down
+Loading xapi database cache from /var/xapi/network.dbcache
+Configured for Vswitch datapath
+action_down: xapi1
+/sbin/ifdown xapi1
+deconfigure ipdev xapi1 on xapi1
+deconfigure_bridge: bridge           - xapi1
+action_down: bring down physical devices - ['eth0', 'eth1']
+/sbin/ifconfig eth0 down
+/sbin/ifconfig eth1 down
+/usr/bin/ovs-vsctl --timeout=20
+    --with-iface --if-exists del-port xapi1
+    --if-exists del-br xapi1
+

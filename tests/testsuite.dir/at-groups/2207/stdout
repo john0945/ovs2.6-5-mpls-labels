@@ -1,0 +1,10 @@
+ct.est = ct_state[1]
+ct.inv = ct_state[4]
+ct.new = ct_state[0]
+ct.rel = ct_state[2]
+ct.rpl = ct_state[3]
+ct.trk = ct_state[5]
+ct_label = NXM_NX_CT_LABEL
+ct_mark = NXM_NX_CT_MARK
+ct_state = NXM_NX_CT_STATE
+

@@ -1,0 +1,1115 @@
+at_fn_group_banner 2119 'ovs-monitor-ipsec.at:3' \
+  "ovs-monitor-ipsec" "                              " 106
+at_xfail=no
+(
+  $as_echo "2119. $at_setup_line: testing $at_desc ..."
+  $at_traceon
+
+ovs_init
+
+$as_echo "ovs-monitor-ipsec.at:4" >"$at_check_line_file"
+(test $HAVE_PYTHON = no) \
+  && at_fn_check_skip 77 "$at_srcdir/ovs-monitor-ipsec.at:4"
+$as_echo "ovs-monitor-ipsec.at:5" >"$at_check_line_file"
+(test "$IS_WIN32" = "yes") \
+  && at_fn_check_skip 77 "$at_srcdir/ovs-monitor-ipsec.at:5"
+$as_echo "ovs-monitor-ipsec.at:6" >"$at_check_line_file"
+($non_ascii_cwd) \
+  && at_fn_check_skip 77 "$at_srcdir/ovs-monitor-ipsec.at:6"
+
+trim () {  # Removes blank lines and lines starting with # from input.
+    sed -e '/^#/d' -e '/^[       ]*$/d' "$@"
+}
+
+   touch .conf.db.~lock~
+   { set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:12: ovsdb-tool create conf.db \$abs_top_srcdir/vswitchd/vswitch.ovsschema"
+at_fn_check_prepare_dynamic "ovsdb-tool create conf.db $abs_top_srcdir/vswitchd/vswitch.ovsschema" "ovs-monitor-ipsec.at:12"
+( $at_check_trace; ovsdb-tool create conf.db $abs_top_srcdir/vswitchd/vswitch.ovsschema
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:12"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+      { set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:12: ovsdb-server --detach --no-chdir --pidfile --log-file --remote=punix:\$OVS_RUNDIR/db.sock"
+at_fn_check_prepare_dynamic "ovsdb-server --detach --no-chdir --pidfile --log-file --remote=punix:$OVS_RUNDIR/db.sock" "ovs-monitor-ipsec.at:12"
+( $at_check_trace; ovsdb-server --detach --no-chdir --pidfile --log-file --remote=punix:$OVS_RUNDIR/db.sock
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+echo stderr:; tee stderr <"$at_stderr"
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:12"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+   on_exit "kill `cat ovsdb-server.pid`"
+   { set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:12: sed < stderr '
+/vlog|INFO|opened log file/d
+/ovsdb_server|INFO|ovsdb-server (Open vSwitch)/d'"
+at_fn_check_prepare_notrace 'an embedded newline' "ovs-monitor-ipsec.at:12"
+( $at_check_trace; sed < stderr '
+/vlog|INFO|opened log file/d
+/ovsdb_server|INFO|ovsdb-server (Open vSwitch)/d'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:12"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+
+
+      { set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:12: ovs-vsctl --no-wait init"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:12"
+( $at_check_trace; ovs-vsctl --no-wait init
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:12"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log"
+$at_traceon; }
+
+
+      { set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:12: ovs-vswitchd --enable-dummy --disable-system  --detach --no-chdir --pidfile --log-file -vvconn -vofproto_dpif -vunixctl"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:12"
+( $at_check_trace; ovs-vswitchd --enable-dummy --disable-system  --detach --no-chdir --pidfile --log-file -vvconn -vofproto_dpif -vunixctl
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+echo stderr:; tee stderr <"$at_stderr"
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:12"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log"
+$at_traceon; }
+
+
+   on_exit "kill `cat ovs-vswitchd.pid`"
+   { set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:12: sed < stderr '
+/ovs_numa|INFO|Discovered /d
+/vlog|INFO|opened log file/d
+/vswitchd|INFO|ovs-vswitchd (Open vSwitch)/d
+/reconnect|INFO|/d
+/ofproto|INFO|using datapath ID/d
+/netdev_linux|INFO|.*device has unknown hardware address family/d
+/ofproto|INFO|datapath ID changed to fedcba9876543210/d
+/dpdk|INFO|DPDK Disabled - to change this requires a restart./d'"
+at_fn_check_prepare_notrace 'an embedded newline' "ovs-monitor-ipsec.at:12"
+( $at_check_trace; sed < stderr '
+/ovs_numa|INFO|Discovered /d
+/vlog|INFO|opened log file/d
+/vswitchd|INFO|ovs-vswitchd (Open vSwitch)/d
+/reconnect|INFO|/d
+/ofproto|INFO|using datapath ID/d
+/netdev_linux|INFO|.*device has unknown hardware address family/d
+/ofproto|INFO|datapath ID changed to fedcba9876543210/d
+/dpdk|INFO|DPDK Disabled - to change this requires a restart./d'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:12"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log"
+$at_traceon; }
+
+
+   { set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:12: add_of_br 0  "
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:12"
+( $at_check_trace; add_of_br 0
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:12"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log"
+$at_traceon; }
+
+
+
+cp "$top_srcdir/vswitchd/vswitch.ovsschema" .
+
+on_exit 'kill `cat pid ovs-monitor-ipsec.pid`'
+
+mkdir etc etc/init.d etc/racoon etc/racoon/certs
+mkdir usr usr/sbin
+mkdir sbin
+
+cat >etc/init.d/racoon <<'_ATEOF'
+#! /bin/sh
+echo "racoon: $@" >&3
+exit 0
+_ATEOF
+
+chmod +x etc/init.d/racoon
+
+cat >usr/sbin/setkey <<'_ATEOF'
+#! /bin/sh
+exec >&3
+echo "setkey:"
+while read line; do
+      echo "> $line"
+done
+_ATEOF
+
+chmod +x usr/sbin/setkey
+
+cat >sbin/ip <<'_ATEOF'
+#! /bin/sh
+exit 0
+_ATEOF
+
+chmod +x sbin/ip
+
+touch etc/racoon/certs/ovs-stale.pem
+
+###
+### Start ovs-monitor-ipsec and wait for it to delete the stale cert.
+###
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:13: \$PYTHON \$top_srcdir/debian/ovs-monitor-ipsec \"--root-prefix=\`pwd\`\" \\
+        \"--pidfile=\`pwd\`/ovs-monitor-ipsec.pid\" \\
+        unix:\$OVS_RUNDIR/db.sock 2>log 3>actions &"
+at_fn_check_prepare_notrace 'a `...` command substitution' "ovs-monitor-ipsec.at:13"
+( $at_check_trace; $PYTHON $top_srcdir/debian/ovs-monitor-ipsec "--root-prefix=`pwd`" \
+        "--pidfile=`pwd`/ovs-monitor-ipsec.pid" \
+        unix:$OVS_RUNDIR/db.sock 2>log 3>actions &
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:13"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log"
+$at_traceon; }
+
+
+
+ovs_wait_cond () {
+    test ! -f etc/racoon/certs/ovs-stale.pem
+}
+if ovs_wait; then :
+else
+
+    $as_echo "ovs-monitor-ipsec.at:13" >"$at_check_line_file"
+at_fn_check_skip 99 "$at_srcdir/ovs-monitor-ipsec.at:13"
+fi
+
+
+
+###
+### Add an ipsec_gre psk interface and check what ovs-monitor-ipsec does
+###
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:18: ovs-vsctl \\
+              -- add-port br0 gre0 \\
+              -- set interface gre0 type=ipsec_gre \\
+                                    options:remote_ip=1.2.3.4 \\
+                                    options:psk=swordfish"
+at_fn_check_prepare_notrace 'an embedded newline' "ovs-monitor-ipsec.at:18"
+( $at_check_trace; ovs-vsctl \
+              -- add-port br0 gre0 \
+              -- set interface gre0 type=ipsec_gre \
+                                    options:remote_ip=1.2.3.4 \
+                                    options:psk=swordfish
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:18"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+ovs_wait_cond () {
+    test -f actions && grep 'spdadd 1.2.3.4' actions >/dev/null
+}
+if ovs_wait; then :
+else
+
+    $as_echo "ovs-monitor-ipsec.at:23" >"$at_check_line_file"
+at_fn_check_skip 99 "$at_srcdir/ovs-monitor-ipsec.at:23"
+fi
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:24: cat actions"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:24"
+( $at_check_trace; cat actions
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; $as_echo "setkey:
+> flush;
+setkey:
+> spdflush;
+racoon: reload
+racoon: reload
+setkey:
+> spdadd 0.0.0.0/0 1.2.3.4 gre -P out ipsec esp/transport//require;
+> spdadd 1.2.3.4 0.0.0.0/0 gre -P in ipsec esp/transport//require;
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:24"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:35: trim etc/racoon/psk.txt"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:35"
+( $at_check_trace; trim etc/racoon/psk.txt
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; $as_echo "1.2.3.4   swordfish
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:35"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:37: trim etc/racoon/racoon.conf"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:37"
+( $at_check_trace; trim etc/racoon/racoon.conf
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; $as_echo "path pre_shared_key \"/etc/racoon/psk.txt\";
+path certificate \"/etc/racoon/certs\";
+remote 1.2.3.4 {
+        exchange_mode main;
+        nat_traversal on;
+        proposal {
+                encryption_algorithm aes;
+                hash_algorithm sha1;
+                authentication_method pre_shared_key;
+                dh_group 2;
+        }
+}
+sainfo anonymous {
+        pfs_group 2;
+        lifetime time 1 hour;
+        encryption_algorithm aes;
+        authentication_algorithm hmac_sha1, hmac_md5;
+        compression_algorithm deflate;
+}
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:37"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+
+###
+### Delete the ipsec_gre interface and check what ovs-monitor-ipsec does
+###
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:62: ovs-vsctl del-port gre0"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:62"
+( $at_check_trace; ovs-vsctl del-port gre0
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:62"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+ovs_wait_cond () {
+    test `wc -l < actions` -ge 17
+}
+if ovs_wait; then :
+else
+
+    $as_echo "ovs-monitor-ipsec.at:63" >"$at_check_line_file"
+at_fn_check_skip 99 "$at_srcdir/ovs-monitor-ipsec.at:63"
+fi
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:64: sed '1,9d' actions"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:64"
+( $at_check_trace; sed '1,9d' actions
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; $as_echo "racoon: reload
+setkey:
+> spddelete 0.0.0.0/0 1.2.3.4 gre -P out;
+> spddelete 1.2.3.4 0.0.0.0/0 gre -P in;
+setkey:
+> dump ;
+setkey:
+> dump ;
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:64"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:74: trim etc/racoon/psk.txt"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:74"
+( $at_check_trace; trim etc/racoon/psk.txt
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:74"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:75: trim etc/racoon/racoon.conf"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:75"
+( $at_check_trace; trim etc/racoon/racoon.conf
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; $as_echo "path pre_shared_key \"/etc/racoon/psk.txt\";
+path certificate \"/etc/racoon/certs\";
+sainfo anonymous {
+        pfs_group 2;
+        lifetime time 1 hour;
+        encryption_algorithm aes;
+        authentication_algorithm hmac_sha1, hmac_md5;
+        compression_algorithm deflate;
+}
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:75"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+
+###
+### Add ipsec_gre certificate interface and check what ovs-monitor-ipsec does
+###
+cat >cert.pem <<'_ATEOF'
+-----BEGIN CERTIFICATE-----
+(not a real certificate)
+-----END CERTIFICATE-----
+_ATEOF
+
+cat >key.pem <<'_ATEOF'
+-----BEGIN RSA PRIVATE KEY-----
+(not a real private key)
+-----END RSA PRIVATE KEY-----
+_ATEOF
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:100: ovs-vsctl \\
+              -- add-port br0 gre1 \\
+              -- set Interface gre1 type=ipsec_gre \\
+                 options:remote_ip=2.3.4.5 \\
+                 options:peer_cert='\"-----BEGIN CERTIFICATE-----
+(not a real peer certificate)
+-----END CERTIFICATE-----
+\"' \\
+                 options:certificate='\"/cert.pem\"' \\
+                 options:private_key='\"/key.pem\"'"
+at_fn_check_prepare_notrace 'an embedded newline' "ovs-monitor-ipsec.at:100"
+( $at_check_trace; ovs-vsctl \
+              -- add-port br0 gre1 \
+              -- set Interface gre1 type=ipsec_gre \
+                 options:remote_ip=2.3.4.5 \
+                 options:peer_cert='"-----BEGIN CERTIFICATE-----
+(not a real peer certificate)
+-----END CERTIFICATE-----
+"' \
+                 options:certificate='"/cert.pem"' \
+                 options:private_key='"/key.pem"'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:100"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+ovs_wait_cond () {
+    test `wc -l < actions` -ge 21
+}
+if ovs_wait; then :
+else
+
+    $as_echo "ovs-monitor-ipsec.at:110" >"$at_check_line_file"
+at_fn_check_skip 99 "$at_srcdir/ovs-monitor-ipsec.at:110"
+fi
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:111: sed '1,17d' actions"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:111"
+( $at_check_trace; sed '1,17d' actions
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; $as_echo "racoon: reload
+setkey:
+> spdadd 0.0.0.0/0 2.3.4.5 gre -P out ipsec esp/transport//require;
+> spdadd 2.3.4.5 0.0.0.0/0 gre -P in ipsec esp/transport//require;
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:111"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:117: trim etc/racoon/psk.txt"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:117"
+( $at_check_trace; trim etc/racoon/psk.txt
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:117"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:118: trim etc/racoon/racoon.conf"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:118"
+( $at_check_trace; trim etc/racoon/racoon.conf
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; $as_echo "path pre_shared_key \"/etc/racoon/psk.txt\";
+path certificate \"/etc/racoon/certs\";
+remote 2.3.4.5 {
+        exchange_mode main;
+        nat_traversal on;
+        ike_frag on;
+        certificate_type x509 \"/cert.pem\" \"/key.pem\";
+        my_identifier asn1dn;
+        peers_identifier asn1dn;
+        peers_certfile x509 \"/etc/racoon/certs/ovs-2.3.4.5.pem\";
+        verify_identifier on;
+        proposal {
+                encryption_algorithm aes;
+                hash_algorithm sha1;
+                authentication_method rsasig;
+                dh_group 2;
+        }
+}
+sainfo anonymous {
+        pfs_group 2;
+        lifetime time 1 hour;
+        encryption_algorithm aes;
+        authentication_algorithm hmac_sha1, hmac_md5;
+        compression_algorithm deflate;
+}
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:118"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:145: cat etc/racoon/certs/ovs-2.3.4.5.pem"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:145"
+( $at_check_trace; cat etc/racoon/certs/ovs-2.3.4.5.pem
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; $as_echo "-----BEGIN CERTIFICATE-----
+(not a real peer certificate)
+-----END CERTIFICATE-----
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:145"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+
+###
+### Delete the ipsec_gre certificate interface.
+###
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:154: ovs-vsctl del-port gre1"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:154"
+( $at_check_trace; ovs-vsctl del-port gre1
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:154"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+ovs_wait_cond () {
+    test `wc -l < actions` -ge 29
+}
+if ovs_wait; then :
+else
+
+    $as_echo "ovs-monitor-ipsec.at:155" >"$at_check_line_file"
+at_fn_check_skip 99 "$at_srcdir/ovs-monitor-ipsec.at:155"
+fi
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:156: sed '1,21d' actions"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:156"
+( $at_check_trace; sed '1,21d' actions
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; $as_echo "racoon: reload
+setkey:
+> spddelete 0.0.0.0/0 2.3.4.5 gre -P out;
+> spddelete 2.3.4.5 0.0.0.0/0 gre -P in;
+setkey:
+> dump ;
+setkey:
+> dump ;
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:156"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:166: trim etc/racoon/psk.txt"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:166"
+( $at_check_trace; trim etc/racoon/psk.txt
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:166"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:167: trim etc/racoon/racoon.conf"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:167"
+( $at_check_trace; trim etc/racoon/racoon.conf
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; $as_echo "path pre_shared_key \"/etc/racoon/psk.txt\";
+path certificate \"/etc/racoon/certs\";
+sainfo anonymous {
+        pfs_group 2;
+        lifetime time 1 hour;
+        encryption_algorithm aes;
+        authentication_algorithm hmac_sha1, hmac_md5;
+        compression_algorithm deflate;
+}
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:167"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:178: test ! -f etc/racoon/certs/ovs-2.3.4.5.pem"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:178"
+( $at_check_trace; test ! -f etc/racoon/certs/ovs-2.3.4.5.pem
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:178"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+
+###
+### Add an SSL certificate interface.
+###
+cp cert.pem ssl-cert.pem
+cp key.pem ssl-key.pem
+cat >ssl-cacert.pem <<'_ATEOF'
+-----BEGIN CERTIFICATE-----
+(not a real CA certificate)
+-----END CERTIFICATE-----
+_ATEOF
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:190: ovs-vsctl set-ssl /ssl-key.pem /ssl-cert.pem /ssl-cacert.pem \\
+              -- add-port br0 gre2 \\
+              -- set Interface gre2 type=ipsec_gre \\
+                 options:remote_ip=3.4.5.6 \\
+                 options:peer_cert='\"-----BEGIN CERTIFICATE-----
+(not a real peer certificate)
+-----END CERTIFICATE-----
+\"' \\
+                 options:use_ssl_cert='\"true\"'"
+at_fn_check_prepare_notrace 'an embedded newline' "ovs-monitor-ipsec.at:190"
+( $at_check_trace; ovs-vsctl set-ssl /ssl-key.pem /ssl-cert.pem /ssl-cacert.pem \
+              -- add-port br0 gre2 \
+              -- set Interface gre2 type=ipsec_gre \
+                 options:remote_ip=3.4.5.6 \
+                 options:peer_cert='"-----BEGIN CERTIFICATE-----
+(not a real peer certificate)
+-----END CERTIFICATE-----
+"' \
+                 options:use_ssl_cert='"true"'
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:190"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+ovs_wait_cond () {
+    test `wc -l < actions` -ge 33
+}
+if ovs_wait; then :
+else
+
+    $as_echo "ovs-monitor-ipsec.at:199" >"$at_check_line_file"
+at_fn_check_skip 99 "$at_srcdir/ovs-monitor-ipsec.at:199"
+fi
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:200: sed '1,29d' actions"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:200"
+( $at_check_trace; sed '1,29d' actions
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; $as_echo "racoon: reload
+setkey:
+> spdadd 0.0.0.0/0 3.4.5.6 gre -P out ipsec esp/transport//require;
+> spdadd 3.4.5.6 0.0.0.0/0 gre -P in ipsec esp/transport//require;
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:200"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:206: trim etc/racoon/psk.txt"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:206"
+( $at_check_trace; trim etc/racoon/psk.txt
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:206"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:207: trim etc/racoon/racoon.conf"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:207"
+( $at_check_trace; trim etc/racoon/racoon.conf
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; $as_echo "path pre_shared_key \"/etc/racoon/psk.txt\";
+path certificate \"/etc/racoon/certs\";
+remote 3.4.5.6 {
+        exchange_mode main;
+        nat_traversal on;
+        ike_frag on;
+        certificate_type x509 \"/ssl-cert.pem\" \"/ssl-key.pem\";
+        my_identifier asn1dn;
+        peers_identifier asn1dn;
+        peers_certfile x509 \"/etc/racoon/certs/ovs-3.4.5.6.pem\";
+        verify_identifier on;
+        proposal {
+                encryption_algorithm aes;
+                hash_algorithm sha1;
+                authentication_method rsasig;
+                dh_group 2;
+        }
+}
+sainfo anonymous {
+        pfs_group 2;
+        lifetime time 1 hour;
+        encryption_algorithm aes;
+        authentication_algorithm hmac_sha1, hmac_md5;
+        compression_algorithm deflate;
+}
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:207"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:234: cat etc/racoon/certs/ovs-3.4.5.6.pem"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:234"
+( $at_check_trace; cat etc/racoon/certs/ovs-3.4.5.6.pem
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; $as_echo "-----BEGIN CERTIFICATE-----
+(not a real peer certificate)
+-----END CERTIFICATE-----
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:234"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+
+###
+### Delete the SSL certificate interface.
+###
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:243: ovs-vsctl del-port gre2"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:243"
+( $at_check_trace; ovs-vsctl del-port gre2
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:243"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+ovs_wait_cond () {
+    test `wc -l < actions` -ge 41
+}
+if ovs_wait; then :
+else
+
+    $as_echo "ovs-monitor-ipsec.at:244" >"$at_check_line_file"
+at_fn_check_skip 99 "$at_srcdir/ovs-monitor-ipsec.at:244"
+fi
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:245: sed '1,33d' actions"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:245"
+( $at_check_trace; sed '1,33d' actions
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; $as_echo "racoon: reload
+setkey:
+> spddelete 0.0.0.0/0 3.4.5.6 gre -P out;
+> spddelete 3.4.5.6 0.0.0.0/0 gre -P in;
+setkey:
+> dump ;
+setkey:
+> dump ;
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:245"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:255: trim etc/racoon/psk.txt"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:255"
+( $at_check_trace; trim etc/racoon/psk.txt
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:255"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:256: trim etc/racoon/racoon.conf"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:256"
+( $at_check_trace; trim etc/racoon/racoon.conf
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+echo >>"$at_stdout"; $as_echo "path pre_shared_key \"/etc/racoon/psk.txt\";
+path certificate \"/etc/racoon/certs\";
+sainfo anonymous {
+        pfs_group 2;
+        lifetime time 1 hour;
+        encryption_algorithm aes;
+        authentication_algorithm hmac_sha1, hmac_md5;
+        compression_algorithm deflate;
+}
+" | \
+  $at_diff - "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:256"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:267: test ! -f etc/racoon/certs/ovs-3.4.5.6.pem"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:267"
+( $at_check_trace; test ! -f etc/racoon/certs/ovs-3.4.5.6.pem
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:267"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+
+{ set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:270: check_logs \"/stream_ssl/d\""
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:270"
+( $at_check_trace; check_logs "/stream_ssl/d"
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:270"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+   { set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:270: test -e \$OVS_RUNDIR/ovs-vswitchd.pid"
+at_fn_check_prepare_dynamic "test -e $OVS_RUNDIR/ovs-vswitchd.pid" "ovs-monitor-ipsec.at:270"
+( $at_check_trace; test -e $OVS_RUNDIR/ovs-vswitchd.pid
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:270"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+   TMPPID=$(cat $OVS_RUNDIR/ovs-vswitchd.pid)
+   { set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:270: ovs-appctl -t ovs-vswitchd exit"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:270"
+( $at_check_trace; ovs-appctl -t ovs-vswitchd exit
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:270"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+   ovs_wait_cond () {
+    if kill -0 $TMPPID 2>/dev/null; then return 1; else return 0; fi
+}
+if ovs_wait; then :
+else
+
+    $as_echo "ovs-monitor-ipsec.at:270" >"$at_check_line_file"
+at_fn_check_skip 99 "$at_srcdir/ovs-monitor-ipsec.at:270"
+fi
+
+   { set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:270: test -e \$OVS_RUNDIR/ovsdb-server.pid"
+at_fn_check_prepare_dynamic "test -e $OVS_RUNDIR/ovsdb-server.pid" "ovs-monitor-ipsec.at:270"
+( $at_check_trace; test -e $OVS_RUNDIR/ovsdb-server.pid
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:270"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+   TMPPID=$(cat $OVS_RUNDIR/ovsdb-server.pid)
+   { set +x
+$as_echo "$at_srcdir/ovs-monitor-ipsec.at:270: ovs-appctl -t ovsdb-server exit"
+at_fn_check_prepare_trace "ovs-monitor-ipsec.at:270"
+( $at_check_trace; ovs-appctl -t ovsdb-server exit
+) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+at_status=$? at_failed=false
+$at_check_filter
+at_fn_diff_devnull "$at_stderr" || at_failed=:
+at_fn_diff_devnull "$at_stdout" || at_failed=:
+at_fn_check_status 0 $at_status "$at_srcdir/ovs-monitor-ipsec.at:270"
+$at_failed && at_fn_log_failure  \
+"ovsdb-server.log" \
+"ovs-vswitchd.log" \
+"log" \
+"actions"
+$at_traceon; }
+
+   ovs_wait_cond () {
+    if kill -0 $TMPPID 2>/dev/null; then return 1; else return 0; fi
+}
+if ovs_wait; then :
+else
+
+    $as_echo "ovs-monitor-ipsec.at:270" >"$at_check_line_file"
+at_fn_check_skip 99 "$at_srcdir/ovs-monitor-ipsec.at:270"
+fi
+
+  set +x
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+read at_status <"$at_status_file"

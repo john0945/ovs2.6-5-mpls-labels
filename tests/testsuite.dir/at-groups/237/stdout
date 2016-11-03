@@ -1,0 +1,18 @@
+OFPST_TABLE reply (xid=0x1):
+  table 0 ("classifier"):
+    active=11, lookup=0, matched=0
+    max_entries=1048576
+    matching:
+      in_port: exact match or wildcard
+      eth_src: exact match or wildcard
+      eth_dst: exact match or wildcard
+      eth_type: exact match or wildcard
+      vlan_vid: exact match or wildcard
+      vlan_pcp: exact match or wildcard
+      ip_src: exact match or wildcard
+      ip_dst: exact match or wildcard
+      nw_proto: exact match or wildcard
+      nw_tos: exact match or wildcard
+      tcp_src: exact match or wildcard
+      tcp_dst: exact match or wildcard
+

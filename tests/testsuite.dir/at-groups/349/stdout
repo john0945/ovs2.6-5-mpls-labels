@@ -1,0 +1,4 @@
+OFPT_BUNDLE_ADD_MESSAGE (OF1.4) (xid=0x2):
+ bundle_id=0x1 flags=atomic
+OFPT_FLOW_MOD (OF1.4) (xid=0x2): ADD table:1 priority=65535,arp,in_port=1,vlan_tci=0x0000/0x1fff,dl_src=50:54:00:00:00:06,dl_dst=50:54:00:00:00:05,arp_spa=192.168.0.2,arp_tpa=192.168.0.1,arp_op=2 actions=output:3
+

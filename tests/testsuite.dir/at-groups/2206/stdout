@@ -1,0 +1,18 @@
+reg0 = xxreg0[96..127]
+reg1 = xxreg0[64..95]
+reg2 = xxreg0[32..63]
+reg3 = xxreg0[0..31]
+reg4 = xxreg1[96..127]
+reg5 = xxreg1[64..95]
+reg6 = xxreg1[32..63]
+reg7 = xxreg1[0..31]
+reg8 = xreg4[32..63]
+reg9 = xreg4[0..31]
+xreg0 = xxreg0[64..127]
+xreg1 = xxreg0[0..63]
+xreg2 = xxreg1[64..127]
+xreg3 = xxreg1[0..63]
+xreg4 = OXM_OF_PKT_REG4
+xxreg0 = NXM_NX_XXREG0
+xxreg1 = NXM_NX_XXREG1
+

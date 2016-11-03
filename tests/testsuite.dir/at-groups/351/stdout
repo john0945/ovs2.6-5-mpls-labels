@@ -1,0 +1,5 @@
+OFPT_BUNDLE_ADD_MESSAGE (OF1.5) (xid=0x3):
+ bundle_id=0x1 flags=atomic
+OFPT_GROUP_MOD (OF1.5) (xid=0x3):
+ ADD group_id=2271560481,type=select,selection_method=hash,selection_method_param=7,bucket=bucket_id:0,weight:100,watch_port:1,actions=output:1,bucket=bucket_id:1,weight:200,watch_port:2,actions=output:2,bucket=bucket_id:2,weight:200,watch_port:3,actions=output:3
+

@@ -1,0 +1,2 @@
+Tested normalizing 128282 expressions of 4 terminals with 1 numeric vars (each 1 bits) in terms of operators == != < <= > >= and 2 string vars.
+

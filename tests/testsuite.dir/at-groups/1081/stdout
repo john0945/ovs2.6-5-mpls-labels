@@ -1,0 +1,17 @@
+LACPCOUNTERS
+	sysID=11:22:33:44:55:66
+	partnerID=00:00:00:00:00:00
+	aggID=3333
+	actorAdmin=0x7
+	actorOper=0xbf
+	partnerAdmin=0x0
+	partnerOper=0x2
+	LACPDUsRx=0
+	markerPDUsRx=4294967295
+	markerRespPDUsRx=4294967295
+	unknownRx=4294967295
+	illegalRx=0
+	LACPDUsTx=1
+	markerPDUsTx=4294967295
+	markerRespPDUsTx=4294967295
+

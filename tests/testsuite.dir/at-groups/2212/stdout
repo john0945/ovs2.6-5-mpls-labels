@@ -1,0 +1,2 @@
+Tested converting 62418 expressions of 3 terminals with 2 numeric vars (each 2 bits) in terms of operators == != < <= > >= and 2 string vars.
+

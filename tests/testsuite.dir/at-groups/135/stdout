@@ -1,0 +1,140 @@
+actions=LOCAL
+
+actions=CONTROLLER:1234
+
+actions=mod_vlan_vid:9
+
+actions=mod_vlan_pcp:6
+
+actions=strip_vlan
+
+actions=mod_dl_src:00:11:22:33:44:55
+
+actions=mod_dl_dst:10:20:30:40:50:60
+
+actions=mod_nw_src:1.2.3.4
+
+actions=mod_nw_dst:192.168.0.1
+
+actions=mod_nw_tos:48
+
+actions=mod_tp_src:80
+
+actions=mod_tp_dst:443
+
+actions=enqueue:10:55
+
+actions=resubmit:5
+
+actions=set_tunnel:0x12345678
+
+actions=set_queue:2309737729
+
+actions=pop_queue
+
+actions=move:NXM_OF_IN_PORT[]->NXM_OF_VLAN_TCI[]
+
+actions=load:0xf009->NXM_OF_VLAN_TCI[]
+
+actions=note:11.e9.9a.ad.67.f3
+
+actions=set_tunnel64:0xc426384d49c53d60
+
+actions=set_tunnel64:0x885f3298
+
+bad OpenFlow10 actions: OFPBIC_UNSUP_INST
+
+bad OpenFlow10 actions: OFPBIC_UNSUP_INST
+
+actions=multipath(eth_src,50,modulo_n,1,0,NXM_NX_REG0[])
+
+actions=bundle(eth_src,0,hrw,ofport,slaves:4,8)
+
+actions=bundle_load(eth_src,0,hrw,ofport,NXM_NX_REG0[],slaves:4,8)
+
+actions=resubmit(10,5)
+
+actions=output:NXM_NX_REG1[5..10]
+
+actions=learn(table=2,idle_timeout=10,hard_timeout=20,fin_idle_timeout=2,fin_hard_timeout=4,priority=80,cookie=0x123456789abcdef0,NXM_OF_VLAN_TCI[0..11],NXM_OF_ETH_DST[]=NXM_OF_ETH_SRC[],output:NXM_OF_IN_PORT[])
+
+actions=exit
+
+actions=dec_ttl
+
+actions=fin_timeout(idle_timeout=10,hard_timeout=20)
+
+actions=controller(reason=invalid_ttl,max_len=1234,id=5678)
+
+actions=controller(reason=invalid_ttl,max_len=1234,id=5678,userdata=01.02.03.04.05,pause)
+
+actions=dec_ttl(32768,12345,90,765,1024)
+
+actions=sample(probability=12345,collector_set_id=23456,obs_domain_id=34567,obs_point_id=45678)
+
+actions=sample(probability=12345,collector_set_id=23456,obs_domain_id=34567,obs_point_id=45678,sampling_port=56789)
+
+bad OpenFlow10 actions: OFPBAC_BAD_LEN
+
+bad OpenFlow10 actions: OFPBAC_BAD_LEN
+
+bad OpenFlow10 actions: OFPBAC_BAD_LEN
+
+bad OpenFlow10 actions: OFPBAC_BAD_OUT_PORT
+
+actions=ct()
+
+actions=ct(commit)
+
+actions=ct(table=10)
+
+actions=ct(zone=10)
+
+actions=ct(zone=NXM_NX_REG0[0..15])
+
+bad OpenFlow10 actions: OFPBAC_BAD_SET_LEN
+
+bad OpenFlow10 actions: OFPBAC_BAD_SET_LEN
+
+actions=ct(commit,exec(load:0xf009->NXM_NX_CT_MARK[]))
+
+bad OpenFlow10 actions: OFPBAC_BAD_SET_ARGUMENT
+
+bad OpenFlow10 actions: OFPBAC_BAD_SET_ARGUMENT
+
+bad OpenFlow10 actions: OFPBAC_BAD_ARGUMENT
+
+bad OpenFlow10 actions: OFPBAC_BAD_ARGUMENT
+
+actions=ct(alg=ftp)
+
+actions=ct(commit,nat(src))
+
+actions=ct(commit,nat(dst))
+
+actions=ct(nat)
+
+actions=ct(commit,nat(src=10.0.0.240,random))
+
+actions=ct(commit,nat(src=10.0.0.240:32768-65535,random))
+
+actions=ct(commit,nat(dst=10.0.0.128-10.0.0.254,hash))
+
+actions=ct(commit,nat(src=10.0.0.240-10.0.0.254:32768-65535,persistent))
+
+actions=ct(commit,nat(src=fe80::20c:29ff:fe88:a18b,random))
+
+actions=ct(commit,nat(src=fe80::20c:29ff:fe88:1-fe80::20c:29ff:fe88:a18b,random))
+
+actions=ct(commit,nat(src=[fe80::20c:29ff:fe88:1]-[fe80::20c:29ff:fe88:a18b]:255-4096,random))
+
+actions=output(port=1,max_len=100)
+
+actions=group:5
+
+bad OpenFlow10 actions: NXBRC_MUST_BE_ZERO
+
+bad OpenFlow10 actions: NXBRC_MUST_BE_ZERO
+
+bad OpenFlow10 actions: OFPBAC_BAD_ARGUMENT
+

@@ -1,0 +1,18 @@
+2016-11-02T12:40:04Z|00001|hmap|DBG|lib/ofp-msgs.c:1143: 6 nodes in bucket (128 nodes, 64 buckets)
+2016-11-02T12:40:04Z|00002|hmap|DBG|lib/ofp-msgs.c:1143: 6 nodes in bucket (256 nodes, 128 buckets)
+2016-11-02T12:40:04Z|00003|hmap|DBG|lib/ofp-msgs.c:1143: 7 nodes in bucket (512 nodes, 256 buckets)
+2016-11-02T12:40:04Z|00004|hmap|DBG|lib/ofp-msgs.c:1143: 8 nodes in bucket (512 nodes, 256 buckets)
+2016-11-02T12:40:04Z|00005|hmap|DBG|lib/ofp-msgs.c:1143: 6 nodes in bucket (512 nodes, 256 buckets)
+2016-11-02T12:40:04Z|00006|hmap|DBG|lib/ofp-msgs.c:1143: 7 nodes in bucket (512 nodes, 256 buckets)
+2016-11-02T12:40:04Z|00007|hmap|DBG|lib/ofp-msgs.c:1143: 7 nodes in bucket (1024 nodes, 512 buckets)
+2016-11-02T12:40:04Z|00008|hmap|DBG|lib/ofp-msgs.c:1143: 6 nodes in bucket (1024 nodes, 512 buckets)
+2016-11-02T12:40:04Z|00009|hmap|DBG|lib/ofp-msgs.c:1143: 6 nodes in bucket (1024 nodes, 512 buckets)
+2016-11-02T12:40:04Z|00010|hmap|DBG|lib/ofp-msgs.c:1143: 7 nodes in bucket (1024 nodes, 512 buckets)
+2016-11-02T12:40:04Z|00011|socket_util|INFO|0:127.0.0.1: listening on port 46828
+2016-11-02T12:40:04Z|00012|vconn|DBG|tcp:127.0.0.1:46828: sent (Success): OFPT_HELLO (OF1.3) (xid=0x1):
+ version bitmap: 0x01, 0x02, 0x03, 0x04
+2016-11-02T12:40:04Z|00013|ofp_msgs|WARN|unknown OpenFlow message (version 0, type 0)
+2016-11-02T12:40:04Z|00014|vconn|DBG|tcp:127.0.0.1:46828: received: ***decode error: OFPBRC_BAD_TYPE***
+00000000  00 00 00 08 12 34 56 78-                        |.....4Vx        |
+2016-11-02T12:40:04Z|00015|vconn|WARN|tcp:127.0.0.1:46828: received message while expecting hello: ***decode error: OFPBRC_BAD_TYPE***
+00000000  00 00 00 08 12 34 56 78-                        |.....4Vx        |

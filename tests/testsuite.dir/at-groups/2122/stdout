@@ -1,0 +1,16 @@
+Force interface xapi3 down
+Loading xapi database cache from /var/xapi/network.dbcache
+Configured for Vswitch datapath
+action_down: xapi3
+/sbin/ifdown xapi3
+deconfigure ipdev xapi3 on xenbr3
+deconfigure_bridge: bridge           - xapi3
+action_down: no more masters, bring down slave xenbr3
+deconfigure_bridge: bridge           - xenbr3
+action_down: bring down physical devices - ['eth3']
+/sbin/ifconfig eth3 down
+/usr/bin/ovs-vsctl --timeout=20
+    --with-iface --if-exists del-port xapi3
+    --if-exists del-br xapi3
+    --if-exists del-br xenbr3
+

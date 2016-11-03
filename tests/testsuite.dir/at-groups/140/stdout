@@ -1,0 +1,6 @@
+actions=LOCAL
+
+actions=move:NXM_OF_IN_PORT[]->NXM_OF_VLAN_TCI[]
+
+actions=move:NXM_OF_IN_PORT[]->NXM_OF_VLAN_TCI[]
+

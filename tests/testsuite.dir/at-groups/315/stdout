@@ -1,0 +1,17 @@
+OFPT_SET_ASYNC (OF1.4) (xid=0x2):
+ master:
+       PACKET_IN: action
+     PORT_STATUS: add modify
+    FLOW_REMOVED: idle delete
+     ROLE_STATUS: (off)
+    TABLE_STATUS: (off)
+  REQUESTFORWARD: (off)
+
+ slave:
+       PACKET_IN: no_match invalid_ttl
+     PORT_STATUS: delete
+    FLOW_REMOVED: delete group_delete meter_delete
+     ROLE_STATUS: (off)
+    TABLE_STATUS: (off)
+  REQUESTFORWARD: (off)
+

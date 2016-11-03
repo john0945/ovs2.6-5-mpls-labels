@@ -1,0 +1,4 @@
+OFPST_GROUP reply (OF1.3) (xid=0x2):
+ group_id=2271560481,duration=18.500s,ref_count=4,packet_count=34952,byte_count=7829367,bucket0:packet_count=4369,byte_count=2236962,bucket1:packet_count=4369,byte_count=2236962,bucket2:packet_count=26214,byte_count=3355443
+ group_id=5,duration=16.500s,ref_count=2,packet_count=34952,byte_count=7829367,bucket0:packet_count=4369,byte_count=2236962,bucket1:packet_count=4369,byte_count=2236962
+

@@ -1,0 +1,16 @@
+usable protocols: any
+chosen protocol: OpenFlow11
+OFPT_FLOW_MOD (OF1.1): ADD tcp,tp_src=123 actions=FLOOD
+OFPT_FLOW_MOD (OF1.1): ADD in_port=LOCAL,dl_vlan=9,dl_src=00:0a:e4:25:6b:b0 actions=drop
+OFPT_FLOW_MOD (OF1.1): ADD udp,dl_vlan_pcp=7 idle:5 actions=pop_vlan,output:0
+OFPT_FLOW_MOD (OF1.1): ADD tcp,nw_src=192.168.0.3,tp_dst=80 actions=set_queue:37,output:1
+OFPT_FLOW_MOD (OF1.1): ADD udp,nw_src=192.168.0.3,tp_dst=53 actions=mod_nw_ecn:2,output:1
+OFPT_FLOW_MOD (OF1.1): ADD priority=60000 cookie:0x123456789abcdef hard:10 actions=CONTROLLER:65535
+OFPT_FLOW_MOD (OF1.1): ADD actions=note:41.42.43.00.00.00,note:00.01.02.03.04.05.06.07.00.00.00.00.00.00,note:00.00.00.00.00.00
+OFPT_FLOW_MOD (OF1.1): ADD ip actions=mod_nw_ttl:1,mod_nw_src:10.4.3.77
+OFPT_FLOW_MOD (OF1.1): ADD sctp actions=drop
+OFPT_FLOW_MOD (OF1.1): ADD sctp actions=drop
+OFPT_FLOW_MOD (OF1.1): ADD in_port=0 actions=resubmit:0
+OFPT_FLOW_MOD (OF1.1): ADD actions=sample(probability=12345,collector_set_id=23456,obs_domain_id=34567,obs_point_id=45678)
+OFPT_FLOW_MOD (OF1.1): ADD actions=sample(probability=12345,collector_set_id=23456,obs_domain_id=34567,obs_point_id=45678,sampling_port=56789)
+

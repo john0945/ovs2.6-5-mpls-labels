@@ -1,0 +1,13 @@
+Force interface xenbr2 down
+Loading xapi database cache from /var/xapi/network.dbcache
+Configured for Vswitch datapath
+action_down: xenbr2
+/sbin/ifdown xenbr2
+deconfigure ipdev xenbr2 on xenbr2
+deconfigure_bridge: bridge           - xenbr2
+action_down: bring down physical devices - ['eth2']
+/sbin/ifconfig eth2 down
+/usr/bin/ovs-vsctl --timeout=20
+    --with-iface --if-exists del-port xenbr2
+    --if-exists del-br xenbr2
+

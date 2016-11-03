@@ -1,0 +1,13 @@
+2016-11-02T12:40:03Z|00001|hmap|DBG|lib/ofp-msgs.c:1143: 6 nodes in bucket (128 nodes, 64 buckets)
+2016-11-02T12:40:03Z|00002|hmap|DBG|lib/ofp-msgs.c:1143: 6 nodes in bucket (256 nodes, 128 buckets)
+2016-11-02T12:40:03Z|00003|hmap|DBG|lib/ofp-msgs.c:1143: 7 nodes in bucket (512 nodes, 256 buckets)
+2016-11-02T12:40:03Z|00004|hmap|DBG|lib/ofp-msgs.c:1143: 8 nodes in bucket (512 nodes, 256 buckets)
+2016-11-02T12:40:03Z|00005|hmap|DBG|lib/ofp-msgs.c:1143: 6 nodes in bucket (512 nodes, 256 buckets)
+2016-11-02T12:40:03Z|00006|hmap|DBG|lib/ofp-msgs.c:1143: 7 nodes in bucket (512 nodes, 256 buckets)
+2016-11-02T12:40:03Z|00007|hmap|DBG|lib/ofp-msgs.c:1143: 7 nodes in bucket (1024 nodes, 512 buckets)
+2016-11-02T12:40:03Z|00008|hmap|DBG|lib/ofp-msgs.c:1143: 6 nodes in bucket (1024 nodes, 512 buckets)
+2016-11-02T12:40:03Z|00009|hmap|DBG|lib/ofp-msgs.c:1143: 6 nodes in bucket (1024 nodes, 512 buckets)
+2016-11-02T12:40:03Z|00010|hmap|DBG|lib/ofp-msgs.c:1143: 7 nodes in bucket (1024 nodes, 512 buckets)
+2016-11-02T12:40:03Z|00011|stream_fd|DBG|send: Broken pipe
+2016-11-02T12:40:03Z|00012|vconn|DBG|unix:fake-pvconn.0: sent (Broken pipe): OFPT_HELLO (OF1.3) (xid=0x1):
+ version bitmap: 0x01, 0x02, 0x03, 0x04

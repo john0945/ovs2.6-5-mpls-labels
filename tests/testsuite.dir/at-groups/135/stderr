@@ -1,0 +1,13 @@
+ofp_actions|WARN|write_metadata instruction not allowed here
+ofp_actions|WARN|write_metadata instruction not allowed here
+ofp_actions|WARN|OpenFlow action OFPAT_OUTPUT length 240 exceeds action buffer length 8
+ofp_actions|WARN|bad action at offset 0 (OFPBAC_BAD_LEN):
+00000000  00 00 00 f0 00 00 00 00-
+ofp_actions|WARN|OpenFlow action OFPAT_OUTPUT length 16 not in valid range [8,8]
+ofp_actions|WARN|bad action at offset 0 (OFPBAC_BAD_LEN):
+00000000  00 00 00 10 ff fe ff ff-00 00 00 00 00 00 00 00
+ofp_actions|WARN|OpenFlow action NXAST_DEC_TTL_CNT_IDS length 17 is not a multiple of 8
+ofp_actions|WARN|cannot set CT fields outside of ct action
+meta_flow|WARN|destination field ct_zone is not writable
+ofp_actions|WARN|ct action doesn't support nested action ct
+ofp_actions|WARN|ct action doesn't support nested modification of reg0

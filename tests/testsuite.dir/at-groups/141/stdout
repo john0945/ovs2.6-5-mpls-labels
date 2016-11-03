@@ -1,0 +1,6 @@
+actions=LOCAL
+
+actions=move:NXM_OF_IN_PORT[]->NXM_OF_VLAN_TCI[]
+
+actions=set_field:00:00:00:00:12:34/00:00:00:00:ff:ff->eth_src
+
