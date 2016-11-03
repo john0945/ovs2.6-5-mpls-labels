@@ -1,8 +1,0 @@
-### t=1000 ###
-set-max-tries 0
-  0 tries left
-enable
-run
-timeout
-  no timeout
-

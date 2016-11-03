@@ -1,2 +1,0 @@
-Tested simplifying 477138 expressions of 3 terminals with 2 numeric vars (each 3 bits) in terms of operators == != < <= > >=.
-

@@ -1,7 +1,0 @@
-row,action,name,number,_version
-<0>,initial,"""ten""",10,"[""uuid"",""<1>""]"
-
-row,action,name,number,_version
-<0>,old,"""ten""",,"[""uuid"",""<1>""]"
-,new,"""five plus five""",10,"[""uuid"",""<2>""]"
-

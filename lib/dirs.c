@@ -46,7 +46,7 @@ const char *
 ovs_sysconfdir(void)
 {
     static struct directory d = {
-        NULL, "/--with-linux=/lib/modules/4.4.0-42-generic/build/etc", "OVS_SYSCONFDIR", OVSTHREAD_ONCE_INITIALIZER
+        NULL, "/etc", "OVS_SYSCONFDIR", OVSTHREAD_ONCE_INITIALIZER
     };
 
     return get_dir(&d);
@@ -56,7 +56,7 @@ const char *
 ovs_pkgdatadir(void)
 {
     static struct directory d = {
-        NULL, "/--with-linux=/lib/modules/4.4.0-42-generic/build/share/openvswitch", "OVS_PKGDATADIR", OVSTHREAD_ONCE_INITIALIZER
+        NULL, "/usr/share/openvswitch", "OVS_PKGDATADIR", OVSTHREAD_ONCE_INITIALIZER
     };
 
     return get_dir(&d);
@@ -66,7 +66,7 @@ const char *
 ovs_rundir(void)
 {
     static struct directory d = {
-        NULL, "/--with-linux=/lib/modules/4.4.0-42-generic/build/var/run/openvswitch", "OVS_RUNDIR", OVSTHREAD_ONCE_INITIALIZER
+        NULL, "/var/run/openvswitch", "OVS_RUNDIR", OVSTHREAD_ONCE_INITIALIZER
     };
 
     return get_dir(&d);
@@ -76,7 +76,7 @@ const char *
 ovs_logdir(void)
 {
     static struct directory d = {
-        NULL, "/--with-linux=/lib/modules/4.4.0-42-generic/build/var/log/openvswitch", "OVS_LOGDIR", OVSTHREAD_ONCE_INITIALIZER
+        NULL, "/var/log/openvswitch", "OVS_LOGDIR", OVSTHREAD_ONCE_INITIALIZER
     };
 
     return get_dir(&d);
@@ -95,7 +95,7 @@ ovs_dbdir(void)
 
             dbdir = (sysconfdir
                      ? xasprintf("%s/openvswitch", sysconfdir)
-                     : "/--with-linux=/lib/modules/4.4.0-42-generic/build/etc/openvswitch");
+                     : "/etc/openvswitch");
         }
         ovsthread_once_done(&once);
     }
@@ -106,7 +106,7 @@ const char *
 ovs_bindir(void)
 {
     static struct directory d = {
-        NULL, "/--with-linux=/lib/modules/4.4.0-42-generic/build/bin", "OVS_BINDIR", OVSTHREAD_ONCE_INITIALIZER
+        NULL, "/usr/bin", "OVS_BINDIR", OVSTHREAD_ONCE_INITIALIZER
     };
 
     return get_dir(&d);

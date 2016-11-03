@@ -1,6 +1,0 @@
-#! /bin/sh
-exec >&3
-echo "setkey:"
-while read line; do
-      echo "> $line"
-done

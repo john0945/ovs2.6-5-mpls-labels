@@ -1,5 +1,0 @@
-OFPST_QUEUE_DESC reply (OF1.4) (xid=0x1): port=1
-queue 21845: min_rate:50.0% max_rate:75.0%
-port=2
-queue 17476: max_rate:10.0%
-

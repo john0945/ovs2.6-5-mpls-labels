@@ -1,5 +1,0 @@
-OFPT_PORT_MOD (OF1.4) (xid=0x3): port: 3: addr:50:54:00:00:00:01
-     config: PORT_DOWN
-     mask:   PORT_DOWN
-     advertise: 10MB-HD
-

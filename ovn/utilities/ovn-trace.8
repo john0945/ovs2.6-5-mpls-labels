@@ -264,7 +264,7 @@ Selects all three forms of output\[char46]
 Causes a file (by default, \fB\fIprogram\fB\[char46]pid\fR) to be
 created indicating the PID of the running process\[char46]  If the
 \fIpidfile\fR argument is not specified, or if it does not begin
-with \fB/\fR, then it is created in \fB/usr/var/run/openvswitch\fR\[char46]
+with \fB/\fR, then it is created in \fB/var/run/openvswitch\fR\[char46]
 .IP
 If \fB\-\-pidfile\fR is not specified, no pidfile is created\[char46]
 .TP
@@ -416,7 +416,7 @@ to the target provided via the \fB\-\-syslog\-target\fR option\[char46]
 \fB\-\-log\-file\fR[\fB=\fR\fIfile\fR]
 Enables logging to a file\[char46]  If \fIfile\fR is specified, then it is
 used as the exact name for the log file\[char46]  The default log file name used if
-\fIfile\fR is omitted is \fB/usr/var/log/openvswitch/\fIprogram\fB\[char46]log\fR\[char46]
+\fIfile\fR is omitted is \fB/var/log/openvswitch/\fIprogram\fB\[char46]log\fR\[char46]
 .TP
 \fB\-\-syslog\-target=\fR\fIhost\fR\fB:\fR\fIport\fR
 Send syslog messages to UDP \fIport\fR on \fIhost\fR, in addition
@@ -493,7 +493,7 @@ be verified to be those of known trusted hosts\[char46]
 \fB\-\-db\fR \fIdatabase\fR
 The OVSDB database remote to contact\[char46]  If the \fBOVN_SB_DB\fR
 environment variable is set, its value is used as the default\[char46]
-Otherwise, the default is \fBunix:/usr/var/run/openvswitch/db\[char46]sock\fR, but this
+Otherwise, the default is \fBunix:/var/run/openvswitch/db\[char46]sock\fR, but this
 default is unlikely to be useful outside of single-machine OVN test
 environments\[char46]
 .RE

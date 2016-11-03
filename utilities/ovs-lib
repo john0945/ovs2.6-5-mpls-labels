@@ -20,13 +20,13 @@
 ## ----------------- ##
 
 # All of these should be substituted by the Makefile at build time.
-logdir=${OVS_LOGDIR-'/--with-linux=/lib/modules/4.4.0-42-generic/build/var/log/openvswitch'}                 # /var/log/openvswitch
-rundir=${OVS_RUNDIR-'/--with-linux=/lib/modules/4.4.0-42-generic/build/var/run/openvswitch'}                 # /var/run/openvswitch
-sysconfdir=${OVS_SYSCONFDIR-'/--with-linux=/lib/modules/4.4.0-42-generic/build/etc'}     # /etc
+logdir=${OVS_LOGDIR-'/var/log/openvswitch'}                 # /var/log/openvswitch
+rundir=${OVS_RUNDIR-'/var/run/openvswitch'}                 # /var/run/openvswitch
+sysconfdir=${OVS_SYSCONFDIR-'/etc'}     # /etc
 etcdir=$sysconfdir/openvswitch                  # /etc/openvswitch
-datadir=${OVS_PKGDATADIR-'/--with-linux=/lib/modules/4.4.0-42-generic/build/share/openvswitch'}        # /usr/share/openvswitch
-bindir=${OVS_BINDIR-'/--with-linux=/lib/modules/4.4.0-42-generic/build/bin'}                 # /usr/bin
-sbindir=${OVS_SBINDIR-'/--with-linux=/lib/modules/4.4.0-42-generic/build/sbin'}              # /usr/sbin
+datadir=${OVS_PKGDATADIR-'/usr/share/openvswitch'}        # /usr/share/openvswitch
+bindir=${OVS_BINDIR-'/usr/bin'}                 # /usr/bin
+sbindir=${OVS_SBINDIR-'/usr/sbin'}              # /usr/sbin
 
 # /etc/openvswitch or /var/lib/openvswitch
 if test X"$OVS_DBDIR" != X; then
@@ -34,7 +34,7 @@ if test X"$OVS_DBDIR" != X; then
 elif test X"$OVS_SYSCONFDIR" != X; then
     dbdir=$OVS_SYSCONFDIR/openvswitch
 else
-    dbdir='/--with-linux=/lib/modules/4.4.0-42-generic/build/etc/openvswitch'
+    dbdir='/etc/openvswitch'
 fi
 
 ovs_ctl_log () {

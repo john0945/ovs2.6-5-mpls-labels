@@ -55,7 +55,7 @@ This is short for \fBunix:\fIfile\fR, as long as \fIfile\fR does not
 contain a colon.
 .
 .IP \fIbridge\fR
-This is short for \fBunix:/usr/var/run/openvswitch/\fIbridge\fB.mgmt\fR, as long as
+This is short for \fBunix:/var/run/openvswitch/\fIbridge\fB.mgmt\fR, as long as
 \fIbridge\fR does not contain a colon.
 .
 .IP [\fItype\fB@\fR]\fIdp\fR
@@ -561,7 +561,7 @@ Connects to \fIswitch\fR and prints to the console all OpenFlow
 messages received.  Unlike other \fBovs\-ofctl\fR commands, if
 \fIswitch\fR is the name of a bridge, then the \fBsnoop\fR command
 connects to a Unix domain socket named
-\fB/usr/var/run/openvswitch/\fIswitch\fB.snoop\fR.  \fBovs\-vswitchd\fR listens on
+\fB/var/run/openvswitch/\fIswitch\fB.snoop\fR.  \fBovs\-vswitchd\fR listens on
 such a socket for each bridge and sends to it all of the OpenFlow
 messages sent to or received from its configured OpenFlow controller.
 Thus, this command can be used to view OpenFlow protocol activity
@@ -3210,7 +3210,7 @@ Causes a file (by default, \fB\*(PN.pid\fR) to be created indicating
 the PID of the running process.  If the \fIpidfile\fR argument is not
 specified, or
 if it does not begin with \fB/\fR, then it is created in
-\fB/usr/var/run/openvswitch\fR.
+\fB/var/run/openvswitch\fR.
 .IP
 If \fB\-\-pidfile\fR is not specified, no pidfile is created.
 .
@@ -3290,9 +3290,9 @@ specifying this option will cause the daemon process not to start.
 Sets the name of the control socket on which \fB\*(PN\fR listens for
 runtime management commands (see \fBRUNTIME MANAGEMENT COMMANDS\fR,
 below).  If \fIsocket\fR does not begin with \fB/\fR, it is
-interpreted as relative to \fB/usr/var/run/openvswitch\fR.  If \fB\-\-unixctl\fR is
+interpreted as relative to \fB/var/run/openvswitch\fR.  If \fB\-\-unixctl\fR is
 not used at all, the default socket is
-\fB/usr/var/run/openvswitch/\*(PN.\fIpid\fB.ctl\fR, where \fIpid\fR is \fB\*(PN\fR's
+\fB/var/run/openvswitch/\*(PN.\fIpid\fB.ctl\fR, where \fIpid\fR is \fB\*(PN\fR's
 process ID.
 .IP
 On Windows a local named pipe is used to listen for runtime management
@@ -3407,7 +3407,7 @@ a message to the target provided via the \fB\-\-syslog\-target\fR option.
 \fB\-\-log\-file\fR[\fB=\fIfile\fR]
 Enables logging to a file.  If \fIfile\fR is specified, then it is
 used as the exact name for the log file.  The default log file name
-used if \fIfile\fR is omitted is \fB/usr/var/log/openvswitch/\*(PN.log\fR.
+used if \fIfile\fR is omitted is \fB/var/log/openvswitch/\*(PN.log\fR.
 .
 .IP "\fB\-\-syslog\-target=\fIhost\fB:\fIport\fR"
 Send syslog messages to UDP \fIport\fR on \fIhost\fR, in addition to

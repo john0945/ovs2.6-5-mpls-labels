@@ -1,5 +1,0 @@
-2016-11-02T12:43:44Z|00001|vlog|INFO|opened log file /root/openvswitch-2.6.0/tests/testsuite.dir/2119/ovs-vswitchd.log
-2016-11-02T12:43:44Z|00002|ovs_numa|INFO|Discovered 1 CPU cores on NUMA node 0
-2016-11-02T12:43:44Z|00003|ovs_numa|INFO|Discovered 1 NUMA nodes and 1 CPU cores
-2016-11-02T12:43:44Z|00004|reconnect|INFO|unix:/root/openvswitch-2.6.0/tests/testsuite.dir/2119/db.sock: connecting...
-2016-11-02T12:43:44Z|00005|reconnect|INFO|unix:/root/openvswitch-2.6.0/tests/testsuite.dir/2119/db.sock: connected

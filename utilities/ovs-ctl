@@ -522,9 +522,9 @@ set_defaults () {
     if test -e "$type_file" ; then
         SYSTEM_TYPE=`cat $type_file`
         SYSTEM_VERSION=`cat $version_file`
-    elif test -e "/usr/etc/os-release"; then
-        SYSTEM_TYPE=`. '/usr/etc/os-release' && echo "$ID"`
-        SYSTEM_VERSION=`. '/usr/etc/os-release' && echo "$VERSION_ID"`
+    elif test -e "/etc/os-release"; then
+        SYSTEM_TYPE=`. '/etc/os-release' && echo "$ID"`
+        SYSTEM_VERSION=`. '/etc/os-release' && echo "$VERSION_ID"`
     elif (lsb_release --id) >/dev/null 2>&1; then
         SYSTEM_TYPE=`lsb_release --id -s`
         system_release=`lsb_release --release -s`
@@ -595,10 +595,10 @@ Other options:
   -V, --version               display version information
 
 Default directories with "configure" option and environment variable override:
-  logs: /usr/var/log/openvswitch (--with-logdir, OVS_LOGDIR)
-  pidfiles and sockets: /usr/var/run/openvswitch (--with-rundir, OVS_RUNDIR)
-  conf.db: /usr/etc/openvswitch (--with-dbdir, OVS_DBDIR)
-  system configuration: /usr/etc (--sysconfdir, OVS_SYSCONFDIR)
+  logs: /var/log/openvswitch (--with-logdir, OVS_LOGDIR)
+  pidfiles and sockets: /var/run/openvswitch (--with-rundir, OVS_RUNDIR)
+  conf.db: /etc/openvswitch (--with-dbdir, OVS_DBDIR)
+  system configuration: /etc (--sysconfdir, OVS_SYSCONFDIR)
   data files: /usr/share/openvswitch (--pkgdatadir, OVS_PKGDATADIR)
   user binaries: /usr/bin (--bindir, OVS_BINDIR)
   system binaries: /usr/sbin (--sbindir, OVS_SBINDIR)

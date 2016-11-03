@@ -1,2 +1,0 @@
-{"columns":{"a":{"type":"integer"},"b":{"type":"string"}},"indexes":[["b","a"]]}
-

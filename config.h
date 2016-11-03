@@ -105,7 +105,7 @@
 /* #undef HAVE_NET_IF_MIB_H */
 
 /* Define to 1 if OpenSSL is installed. */
-/* #undef HAVE_OPENSSL */
+#define HAVE_OPENSSL 1
 
 /* Define to 1 if `posix_memalign' works. */
 #define HAVE_POSIX_MEMALIGN 1
@@ -178,8 +178,7 @@
    extenions. */
 #define HAVE___THREAD 1
 
-/* Define to the sub-directory in which libtool stores uninstalled libraries.
-   */
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
 #define LT_OBJDIR ".libs/"
 
 /* Name of package */

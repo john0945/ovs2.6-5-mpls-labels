@@ -1,2 +1,0 @@
-OFPT_TABLE_MOD (OF1.1) (xid=0x2): table_id=2, flow_miss_config=drop
-

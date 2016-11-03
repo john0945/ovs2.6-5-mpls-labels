@@ -16,12 +16,12 @@
 
 set -e
 
-pkidir='/usr/var/lib/openvswitch/pki'
+pkidir='/var/lib/openvswitch/pki'
 command=
 prev=
 force=no
 batch=no
-log='/usr/var/log/openvswitch/ovs-pki.log'
+log='/var/log/openvswitch/ovs-pki.log'
 keytype=rsa
 bits=2048
 

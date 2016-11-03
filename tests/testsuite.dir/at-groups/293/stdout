@@ -1,4 +1,0 @@
-OFPT_QUEUE_GET_CONFIG_REPLY (OF1.1) (xid=0x1): port=1
-queue 17476:
-queue 21845: min_rate:50.0% max_rate:75.0%
-

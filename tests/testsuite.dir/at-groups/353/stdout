@@ -1,4 +1,0 @@
-NXST_IPFIX_BRIDGE reply (xid=0x2):
-  bridge ipfix: flows=1, current flows=16, sampled pkts=120, ipv4 ok=240, ipv6 ok=0, tx pkts=4
-                pkts errs=160, ipv4 errs=2, ipv6 errs=3, tx errs=5
-

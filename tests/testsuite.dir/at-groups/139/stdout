@@ -1,4 +1,0 @@
-actions=LOCAL
-
-bad OpenFlow12 actions: OFPBAC_BAD_SET_MASK
-

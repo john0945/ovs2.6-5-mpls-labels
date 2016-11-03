@@ -1,7 +1,0 @@
-OFPST_TABLE reply (OF1.3) (xid=0x1):
-  table 0:
-    active=11, lookup=512, matched=256
-
-  table 1:
-    active=12, lookup=513, matched=257
-

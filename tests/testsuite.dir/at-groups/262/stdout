@@ -1,3 +1,0 @@
-OFPST_GROUP_DESC reply (OF1.1) (xid=0x2):
- group_id=8192,type=select,bucket=weight:100,watch_port:1,actions=output:1,bucket=weight:200,watch_port:2,actions=output:2,bucket=weight:200,watch_port:3,actions=output:3
-

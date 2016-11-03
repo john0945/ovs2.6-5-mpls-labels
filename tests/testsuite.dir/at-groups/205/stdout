@@ -1,2 +1,0 @@
-OFPT_FLOW_MOD (OF1.2) (xid=0x2): ADD priority=255,icmp6,icmp_type=135 actions=set_field:::1->nd_target,set_field:aa:aa:aa:aa:aa:aa->nd_sll
-

@@ -87,7 +87,7 @@ The following options are available:
    -V, --version              display version information
    --db-sock                  A connection string to reach the Open vSwitch
                               ovsdb-server.
-                              Default 'unix:/usr/var/run/openvswitch/db.sock'
+                              Default 'unix:/var/run/openvswitch/db.sock'
    --dump-cmd                 Command to use for tcpdump (default 'tcpdump')
    -i, --interface            Open vSwitch interface to mirror and tcpdump
    --mirror-to                The name for the mirror port to use (optional)
@@ -344,7 +344,7 @@ def argv_tuples(lst):
 
 
 def main():
-    db_sock = 'unix:/usr/var/run/openvswitch/db.sock'
+    db_sock = 'unix:/var/run/openvswitch/db.sock'
     interface = None
     tcpdargs = []
 

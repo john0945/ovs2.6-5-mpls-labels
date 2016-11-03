@@ -1,3 +1,0 @@
-kill `cat pid ovs-monitor-ipsec.pid`
-kill 21568
-kill 21504

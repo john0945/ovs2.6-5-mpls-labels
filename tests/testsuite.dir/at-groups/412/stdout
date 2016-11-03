@@ -1,3 +1,0 @@
-in_port(1),eth(src=00:01:02:03:04:05,dst=10:11:12:13:14:15),eth_type(0x86dd),ipv6(src=::1/::255,dst=::2/::255,label=0/0xf0,proto=10/0xf0,tclass=0x70/0xf0,hlimit=128/0xf0,frag=no)
-in_port(1),eth(src=00:01:02:03:04:05,dst=10:11:12:13:14:15),eth_type(0x86dd),ipv6(src=::1,dst=::2,label=0,proto=6,tclass=0,hlimit=128,frag=no),tcp(src=80/0xff00,dst=8080/0xff)
-
